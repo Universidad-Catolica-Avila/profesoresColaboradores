@@ -107,6 +107,7 @@ header {
 
 header span {
     padding: 20px;
+    color: #696969;
 }
 
 #header-contenido {
@@ -131,13 +132,16 @@ header span {
     background-color: #fff;
 }
 
-#header-tabla,
-.fila {
-    display: flex;
+#header-tabla {
+    font-weight: bold;
 }
 
-#header-tabla p,
-.fila div {
+#header-tabla, .fila {
+    display: flex;
+    color: #696969;
+}
+
+#header-tabla p, .fila div {
     flex: 1;
     padding: 20px;
     border-bottom: 1px solid #ddd;
@@ -146,13 +150,6 @@ header span {
 
 .fila div {
     text-align: left;
-}
-
-.fila div img {
-    display: inline-block;
-    max-width: 100%;
-    height: auto;
-    width: 8%;
 }
 
 .fila div:last-child {
