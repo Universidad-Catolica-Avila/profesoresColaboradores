@@ -4,15 +4,55 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profesores Colaboradores</title>
-    <link rel="stylesheet" href="style.css"> <!-- Enlace a tu archivo CSS -->
+    <link rel="stylesheet" href="styles.css"> <!-- Enlace a tu archivo CSS -->
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
 </head>
 <body>
-    <h1>Lista de Profesores Colaboradores</h1>
-    
-    <ul id="profesores-list">
-        <!-- Aquí se listarán los profesores colaboradores -->
-    </ul>
-
-    <script src="script.js"></script> <!-- Enlace a tu archivo JavaScript -->
+    <header>
+        <span class="material-symbols-outlined">menu</span>
+        <span class="material-symbols-outlined">fullscreen</span>
+    </header>
+    <main class="container">
+        <nav class="navbar">
+            <div class="imagenes">
+                <img src="img/logo_ucav.png" alt="Logo" class="logo">
+                <span class="material-symbols-outlined">account_circle</span>
+            </div>
+            <div class="user-info">
+                <p>Diego</p>    
+                <p>diego.blazquez@ucavila.es</p>
+            </div>
+            <div class="menu">
+                <ul class="menu-section">PRINCIPAL</ul>
+                    <li><span class="material-symbols-outlined">group</span><span>Asociados</span></li>
+                    <li><span class="material-symbols-outlined">file_copy</span><span>Remesas</span></li>
+                <ul class="menu-section">ADMINISTRACIÓN</ul>
+                    <li><span class="material-symbols-outlined">group</span><span>Gestión usuarios</span></li>
+            </div>
+        </nav>
+        <section class="contenido">
+            <article id="header-contenido">
+                <h2>Usuarios</h2>
+                <button id="nuevoUsuarioBtn">+ Nuevo</button>
+            </article>
+            <article class="tabla">
+                <div id="header-tabla">
+                    <p>Nombre</p>
+                    <p>Email</p>
+                    <p>Telefono</p>
+                    <p>Rol</p>
+                    <p>Acciones</p>
+                </div>
+                <div id="content-tabla">
+                    <div id="profesores-list"></div>
+                </div>
+            </article>
+        </section>
+    </main>
+        
+        
+        
+        
+    <script src="script copy.js"></script> <!-- Enlace a tu archivo JavaScript -->
 </body>
 </html>
