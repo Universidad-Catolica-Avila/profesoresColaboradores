@@ -97,6 +97,14 @@ window.addEventListener('load', function() {
         editIndex = null; 
     });
 
+    document.getElementById("nombre").addEventListener("keyup", function(){
+        this.value = this.value.replace(/[^a-z A-Z]/g, '')
+    });
+
+    document.getElementById("telefono").addEventListener("keyup", function(){
+        this.value = this.value.replace(/[^0-9]/g, '')
+    });
+
     nuevoUsuarioForm.addEventListener("submit", function (event) {
         event.preventDefault(); 
 
@@ -211,6 +219,14 @@ window.addEventListener('load', function() {
             }
         });
     }
+
+    document.getElementById("filtro-nombre").addEventListener("keyup", function(){
+        this.value = this.value.replace(/[^a-z A-Z]/g, '')
+    });
+
+    document.getElementById("filtro-telefono").addEventListener("keyup", function(){
+        this.value = this.value.replace(/[^0-9]/g, '')
+    });
 
     document.getElementById("filtro-nombre").addEventListener("keyup", filtrar);
     document.getElementById("filtro-email").addEventListener("keyup", filtrar);
