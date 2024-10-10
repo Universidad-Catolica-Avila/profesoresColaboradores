@@ -30,13 +30,38 @@ li {
     width: 100%;
 }
 
+/*---------------------------------------------------------HEADER---------------------------------------------------------*/
+
+header {
+    width: 80%;
+    background-color: #fff;
+    position: fixed;
+    top: 0;
+    right: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1000;
+    box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.2);
+    transition: width 0.5s ease;
+}
+
+header span {
+    padding: 20px;
+    color: #696969;
+    cursor: pointer;
+}
+
+/*---------------------------------------------------------NAV---------------------------------------------------------*/
+
 .navbar {
     width: 20%;
-    background-color: #2c3e50;
+    background-color: #0F172A;
     color: white;
     display: flex;
     flex-direction: column;
-    
+    opacity: 100;
+    transition: 0.5s ease;
 }
 
 .navbar .imagenes{
@@ -66,6 +91,14 @@ li {
     padding: 20px;
 }
 
+.menu a{
+    text-decoration: none;
+}
+
+.menu li.active{
+    background-color: #2c3e50;
+}
+
 .menu ul{
     color: #DB313A;
 }
@@ -74,7 +107,7 @@ li {
     display: flex;
     align-content: center;
     align-items: center;
-    background-color: #2c3e50;
+    background-color: #0F172A;
     color: #ddd;
 }
 
@@ -83,43 +116,45 @@ li {
 }
 
 .menu li:hover{
-    background-color: #273646;
+    background-color: #2c3e50;
     color: #fff;
     cursor: pointer;
 }
 
-header {
-    width: 80%;
-    background-color: #f4f4f4;
-    position: fixed;
-    top: 0;
-    right: 0;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    z-index: 1000;
-    box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.2);
-}
-
-header span {
-    padding: 20px;
-    color: #696969;
-}
+/*---------------------------------------------------------CONTENIDO---------------------------------------------------------*/
 
 #header-contenido {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 2%;
-    background-color: #f4f4f4;
+    background-color: #fff;
     padding: 20px;
+}
+
+.botones-header-contenido {
+    display: flex;
+}
+
+.btn-header-contenido{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.btn-header-contenido span{
+    margin-right: 5px;   
+}
+
+.btn-header-contenido:first-child{
+    margin-right: 10px;
 }
 
 .contenido {
     flex: 1;
-    background-color: #ddd;
+    background-color: #F1F5F9;
     width: 100%;
-    margin-top: 70px;
+    margin-top: 64px;
 }
 
 .tabla{
@@ -144,6 +179,13 @@ header span {
     margin: 0;
 }
 
+#header-tabla p:last-child, .fila div:last-child {
+    flex: .4;
+    padding: 20px;
+    border-bottom: 1px solid #ddd;
+    margin: 0;
+}
+
 .fila div {
     text-align: left;
 }
@@ -160,7 +202,161 @@ button {
     padding: 15px;
     padding-left: 35px;
     padding-right: 35px;
-
     cursor: pointer;
     border-radius: 30px;
 }
+
+button:hover{
+    background-color: #c40c15;
+    transition: .5s;
+}
+
+#form-container, #form-container2{
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    display: flex;
+    justify-content: center;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    z-index: 1111;
+    background-color: rgba(0, 0, 0, 0.708);
+}
+
+#form-container2 label{
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+}
+
+#nuevoUsuarioForm, #confirmacionForm{
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+    top: 50%; 
+    left: 50%; 
+    transform: translate(-50%, -50%);
+    position: fixed;
+    background-color: red;
+    box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    padding: 10px;
+    border-radius: 50px;
+}
+
+#nuevoUsuarioForm input, #nuevoUsuarioForm select{    
+    width: 80%;
+    margin: 2px auto;
+    padding: 5px;
+    border-radius: 10px;
+    border: #ddd;
+}
+
+#nuevoUsuarioForm button, #confirmacionForm button{
+    width: 50%;
+    margin: 5px auto;
+}
+
+#nuevoUsuarioForm button:hover, #confirmacionForm button:hover{
+    background-color: #c40c15;
+    transition: .5s;
+}
+
+.filtro {
+    padding: 20px;
+}
+
+.filtro form {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly; 
+}
+
+.filtro input, .filtro select {
+    padding: 10px;
+    border-radius: 5px;
+    width: 15%;
+    color: #696969;
+    background-color: #F1F5F9;
+    border: .5px solid #696969;
+}
+
+#filtro-descatalogado{
+    margin-left: 20px;
+    width: auto;
+}
+
+.descatalogado-check{
+    margin: 30px;
+    display: flex;
+}
+
+/*---------------------------------------------------------CHECKBOX---------------------------------------------------------*/
+  .checkbox-wrapper-3 input[type="checkbox"] {
+    visibility: hidden;
+    display: none;
+  }
+
+  .checkbox-wrapper-3 .toggle {
+    position: relative;
+    display: block;
+    width: 40px;
+    height: 20px;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    transform: translate3d(0, 0, 0);
+  }
+  .checkbox-wrapper-3 .toggle:before {
+    content: "";
+    position: relative;
+    top: 3px;
+    left: 3px;
+    width: 34px;
+    height: 14px;
+    display: block;
+    background: #9A9999;
+    border-radius: 8px;
+    transition: background 0.2s ease;
+  }
+  .checkbox-wrapper-3 .toggle span {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 20px;
+    height: 20px;
+    display: block;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 3px 8px rgba(154, 153, 153, 0.5);
+    transition: all 0.2s ease;
+  }
+  .checkbox-wrapper-3 .toggle span:before {
+    content: "";
+    position: absolute;
+    display: block;
+    margin: -18px;
+    width: 56px;
+    height: 56px;
+    background: rgba(220, 46, 46, 0.5);
+    border-radius: 50%;
+    transform: scale(0);
+    opacity: 1;
+    pointer-events: none;
+  }
+
+  .checkbox-wrapper-3 #cbx-3:checked + .toggle:before {
+    background: #DB313A;
+  }
+  .checkbox-wrapper-3 #cbx-3:checked + .toggle span {
+    background: #c40c15;
+    transform: translateX(20px);
+    transition: all 0.2s cubic-bezier(0.8, 0.4, 0.3, 1.25), background 0.15s ease;
+    box-shadow: 0 3px 8px rgba(220, 46, 46, 0.2);
+  }
+  .checkbox-wrapper-3 #cbx-3:checked + .toggle span:before {
+    transform: scale(1);
+    opacity: 0;
+    transition: all 0.4s ease;
+  }
+
+/*---------------------------------------------------------CHECKBOX---------------------------------------------------------*/ 
