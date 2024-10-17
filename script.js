@@ -6,8 +6,16 @@ const profesores = [
     "Profesor D"
 ];
 
+const email = [
+    "ProfesorA@gmail.com",
+    "ProfesorB@gmail.com",
+    "ProfesorC@gmail.com",
+    "ProfesorD@gmail.com"
+];
+
 // Seleccionamos el elemento ul donde se mostrarán los profesores
 const listaProfesores = document.getElementById("profesores-list");
+const listaEmail = document.getElementById("email-list");
 
 // Función para mostrar los profesores en la lista
 function mostrarProfesores() {
@@ -18,5 +26,18 @@ function mostrarProfesores() {
     });
 }
 
+function mostrarMail() {
+    email.forEach(email => {
+        const li = document.createElement("li");
+        li.textContent = email;
+        listaEmail.appendChild(li);
+    });
+}
+
+function cargarFunciones() {
+    mostrarProfesores();    
+    mostrarMail();    
+}
 // Ejecutamos la función cuando se carga la página
-window.onload = mostrarProfesores;
+window.onload = cargarFunciones();
+

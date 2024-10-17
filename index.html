@@ -4,15 +4,117 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profesores Colaboradores</title>
-    <link rel="stylesheet" href="style.css"> <!-- Enlace a tu archivo CSS -->
+    <link rel="shortcut icon" href="img/logo_ucav.png" type="image/x-icon">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.9/xlsx.full.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+    <script src="script_menu_y_nav.js"></script>
 </head>
 <body>
-    <h1>Lista de Profesores Colaboradores</h1>
-    
-    <ul id="profesores-list">
-        <!-- Aquí se listarán los profesores colaboradores -->
-    </ul>
-
-    <script src="script.js"></script> <!-- Enlace a tu archivo JavaScript -->
+    <header id="header">
+        <span id="menu-hamburguesa" class="material-symbols-outlined">menu</span>
+        <span id="boton-pantalla-completa" class="material-symbols-outlined">fullscreen</span>
+    </header>
+    <main class="container" >
+        <nav id="navbar" class="navbar">
+            <div class="imagenes">
+                <img src="img/logo_ucav.png" alt="Logo" class="logo">
+                <span class="material-symbols-outlined">account_circle</span>
+            </div>
+            <div class="user-info">
+                <p>Diego</p>    
+                <p>diego.blazquez@ucavila.es</p>
+            </div>
+            <div class="menu" id="menu">
+                <ul class="menu-section">
+                    <p>PRINCIPAL</p>
+                    <a href="asociados.html">
+                        <li><span class="material-symbols-outlined">group</span><span>Asociados</span></li>
+                    </a>
+                    <a href="remesas.html">
+                        <li><span class="material-symbols-outlined">file_copy</span><span>Remesas</span></li>
+                    </a>
+                </ul>
+                <ul class="menu-section">
+                    <p>ADMINISTRACIÓN</p>
+                    <a href="index.html">
+                        <li class="active"><span class="material-symbols-outlined">group</span><span>Gestión usuarios</span></li>
+                    </a>   
+                </ul>
+            </div>
+        </nav>
+        <section class="contenido">
+            <article id="header-contenido">
+                <h2>Usuarios</h2>
+                <div class="botones-header-contenido">
+                    <button class="btn-header-contenido" id="exportarTabla"><span class="material-symbols-outlined">download</span>Exportar</button>
+                    <button class="btn-header-contenido" id="nuevoUsuarioBtn"><span class="material-symbols-outlined">add</span>Nuevo</button>
+                </div>
+            </article>
+            <article class="filtro">
+                <form id="filtro-formulario">
+                    <input type="text" id="filtro-nombre" placeholder="Buscar por Nombre">
+                    <input type="text" id="filtro-apellido" placeholder="Buscar por Apellido">
+                    <input type="email" id="filtro-email" placeholder="Buscar por Email">
+                    <input type="tel" id="filtro-telefono" placeholder="Buscar por Teléfono">
+                    <select id="filtro-rol">
+                        <option value="" disabled selected hidden>Buscar por Rol</option>
+                        <option value="Usuario">Usuario</option>
+                        <option value="Admin">Admin</option>
+                    </select>
+                    <input type="checkbox" name="descatalogado" id="filtro-descatalogado">
+                    <label for="filtro-descatalogado">descatalogado</label>
+                    <button type="button" id="reset-filtro">Reiniciar Filtros</button>
+                </form>
+            </article>
+            <article id="tabla" class="tabla">
+                <div id="header-tabla">
+                    <p class="nombre">Nombre</p>
+                    <p class="apellido">Apellido</p>
+                    <p class="email">Email</p>
+                    <p class="telefono">Telefono</p>
+                    <p class="rol">Rol</p>
+                    <p class="acciones">Acciones</p>
+                </div>
+                <div id="content-tabla">
+                    <div id="profesores-list"></div>
+                </div>
+            </article>
+            <article class="descatalogado-check">
+                <div class="checkbox-wrapper-3">
+                    <input type="checkbox" id="cbx-3"/>
+                    <label for="cbx-3" class="toggle"><span></span></label>
+                </div>
+                
+                <label for="cbx-3">Descatalogado</label>
+            </article>
+        </section>
+        <section id="form-container" style="pointer-events: none;">
+            <form id="nuevoUsuarioForm">
+                <input type="text" id="nombre" placeholder="Nombre" required>
+                <input type="text" id="apellido" placeholder="Apellido" required>
+                <input type="email" id="email" placeholder="Email" required readonly>
+                <input type="tel" id="telefono" placeholder="Teléfono" required>
+                <select id="rol" required>
+                    <option value="Usuario">Usuario</option>
+                    <option value="Admin">Admin</option>
+                </select>
+                <button type="submit">Agregar Usuario</button>
+                <button type="button" id="cancelBtn">Cancelar</button>
+            </form>    
+        </section>
+        <section id="form-container2" style="pointer-events: none;">
+            <form id="confirmacionForm">
+                <label for="seguro">Seguro quieres eliminar esta fila?</label>
+                <button type="button" id="confirmarBtn">Si</button>
+                <button type="button" id="cancelBtn2">No</button>
+            </form>
+        </section>
+        <section id="confirm-container" style="pointer-events: none;">
+            <p id="avisoConfirm"></p>
+        </section>
+    </main>
+    <script src="script_copy.js"></script>
 </body>
 </html>
