@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <link rel="stylesheet" href="styles/profesores.css">
+    <script src="js/profesores.js"></script>
+    <!-- libreria para exportar a un archivo excel -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.9/xlsx.full.min.js"></script>
+    <title>Profesores</title>
+</head>
+
+<body>
+
+    <div class="grid">
+        <div class="cabecera">
+            <div class="header-grid">
+                <div class="bars"> <i class="fa-solid fa-bars"></i></div>
+                <div class="expand"> <i class="fa-solid fa-expand"></i></div>
+            </div>
+        </div>
+        <div class="lateral">
+            <div class="side-grid">
+                <div class="imagen-side"><img src="../logo.avif" alt="" id="imagen-side"></div>
+                <div class="user-side"> <i class="fa-regular fa-user icono-user"></i></div>
+                <div class="nombre-side">Esteban</div>
+                <div class="correo-side">esteban@gmail.com</div>
+                <div class="principal-side">Principal</div>
+                <div id="foco" class="asociados-side"> <i class="fa-solid fa-user-group icono-asociados"></i> Asociados
+                </div>
+                <div id="foco" class="remesas-side"> <i class="fa-solid fa-copy icono-remesas"></i> Remesas</div>
+                <div class="administracion-side">Administración</div>
+                <div id="foco" class="gestion-usuarios"><i class="fa-solid fa-user-group icono-asociados"></i> Gestión
+                    usuarios</div>
+            </div>
+        </div>
+        <div class="menu">
+            <div class="menu-grid">
+                
+                <div class="usuarios-titulo">
+                    <h2>Usuarios</h2>
+                </div>
+                <div class="boton-nuevo "> + Nuevo</div>
+                <div class="filtrados-menu">
+                    <div id="filtrados"><input type="text" name="nombre-filtrar" id="nombre-filtrar" placeholder="Buscar por Nombre"></div>
+                    <div id="filtrados"><input type="text" name="correo-filtrar" id="correo-filtrar" placeholder="Buscar por Correo"></div>
+                    <div id="filtrados"><input type="text" name="telefono-filtrar" id="telefono-filtrar" placeholder="Buscar por Telefono"></div>
+                    <div id="filtrados"><input type="text" name="rol-filtrar" id="rol-filtrar" placeholder="Buscar por Rol"></div>
+                    <div id="filtrados">
+                        <div class="form-check descatalogados-filtrar">
+                            <input class="form-check-input" type="checkbox" value="" id="descatalogados">
+                            <label class="form-check-label" for="descatalogados">
+                                Descatalogados
+                            </label>
+                          </div>
+                    </div>  
+                    <div class="boton-exportar"> <i class="fa-solid fa-file-arrow-down icono-descargar"></i> Exportar a excel </div>  
+                </div>
+                <div class="lista-menu">
+                    <table id="userTable">
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Email</th>
+                            <th>Telefono</th>
+                            <th>Rol</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </table>
+                </div>
+                <div class="pagination" id="pagination">
+                    <button id="prevButton">Anterior</button>
+                    <div id="pageButtons">1</div>
+                    <button id="nextButton">Siguiente</button>
+                </div>
+                <span class="leyenda-descatalogados">
+                    <div class="color-cuadro"></div>
+                    Profesores descatalogados
+                </span>
+                
+            </div>
+        </div>
+        <div class="modalInformativa" id="modal-informativa">
+            <div class="modal-content-informativa">
+                Se ha añadido correctamente  <i class="fa-solid fa-user-check"></i>
+            </div>
+        </div>
+        <!-- ventana modal: para añadir un usuario -->
+        <div class="modal" id="modal-añadir" >
+            <div class="modal-content">
+                <h3>Añadir usuario</h3>
+                <form id="formAñadir">
+                    <label for="nombre-add">Nombre</label>
+                    <input type="text" id="nombre-add" required>
+                    <label for="email-add">Email</label>
+                    <input type="email" id="email-add" required>
+                    <label for="numero-add">Número</label>
+                    <input type="text" id="numero-add" required>
+                    <label>Elije un rol de la lista:
+                        <input list="rol-add" id="rol-input-add" name="rol" />
+                    </label>
+                    <datalist id="rol-add">
+                        <option value="Admin"></option>
+                        <option value="Usuario"></option>
+                    </datalist>
+                    <input type="button" value="Añadir" class="btn-añadir btn" id="btn-add">
+                    <input type="button" value="Cancelar" class="btn-cancelar-añadir btn" id="btn-cancel-add">
+                </form>
+            </div>
+        </div>
+
+        <!-- ventana modal: para modificar -->
+        <div class="modal" id="modal-modificar" >
+            <div class="modal-content">
+                <h3>Modificar usuario</h3>
+                <form id="formModificar">
+                    <label for="nombre-edit">Nombre</label>
+                    <input type="text" id="nombre-edit" required>
+                    <label for="email-edit">Email</label>
+                    <input type="email" id="email-edit" required>
+                    <label for="numero-edit">Número</label>
+                    <input type="text" id="numero-edit" required>
+                    <label>Elije un rol de la lista:
+                        <input list="rol-edit" id="rol-input-edit" name="rol" />
+                    </label>
+                    <datalist id="rol-edit">
+                        <option value="Admin"></option>
+                        <option value="Usuario"></option>
+                    </datalist>
+                    <input type="button" value="Modificar" class="btn-modificar btn" id="btn-modify">
+                    <input type="button" value="Cancelar" class="btn-cancelar-modificar btn" id="btn-cancel-edit">
+                </form>
+            </div>
+        </div>
+        <div class="pie">
+            piepiepeipe
+            <br><br><br>
+            <div>asdadsad</div><br>
+        </div>
+    </div>
+
+</body>
+
+</html>
