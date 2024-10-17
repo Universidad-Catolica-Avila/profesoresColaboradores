@@ -1,15 +1,17 @@
-
 window.addEventListener('load', function() {
 
     const datos = [
-        { nombre: "Diego", email: "diego.blazquez@ucavila.es", telefono: "666666666", rol: "Admin", eliminado: "no"},
-        { nombre: "Prueba", email: "prueba@ucavila.es", telefono: "699887454", rol: "Usuario", eliminado: "no"},
-        { nombre: "Gestor01", email: "gestor@ucavila.es", telefono: "699777111", rol: "Usuario", eliminado: "si" }
+        { nombre: "Diego", apellido: "Blazquez", email: "diego.blazquez@ucavila.es", telefono: "666666666", rol: "Admin", eliminado: "no"},
+        { nombre: "Prueba01", apellido: "01", email: "prueba@ucavila.es", telefono: "699887454", rol: "Usuario", eliminado: "no"},
+        { nombre: "Gestor01", apellido: "01" , email: "gestor@ucavila.es", telefono: "699777111", rol: "Usuario", eliminado: "si" }
     ];
 
     const profesoresList = document.getElementById('profesores-list');
     const formbody = document.getElementById('form-container');
     const formConfirm = document.getElementById('form-container2');
+    const avisoConfirm = document.getElementById('confirm-container');
+    const mensaje_avisoConfirm = document.getElementById('avisoConfirm');
+    const cbx_3 = document.getElementById("cbx-3");
     let editIndex = null;
 
     function agregarFila(dato, index) {
@@ -19,15 +21,23 @@ window.addEventListener('load', function() {
 
         const nombre = document.createElement('div');
         nombre.textContent = dato.nombre;
+        nombre.className = "nombre";
+
+        const apellido = document.createElement('div');
+        apellido.textContent = dato.apellido;
+        apellido.className += "apellido";
 
         const email = document.createElement('div');
         email.textContent = dato.email;
+        email.className += "email";
 
         const telefono = document.createElement('div');
         telefono.textContent = dato.telefono;
+        telefono.className += "telefono";
 
         const rol = document.createElement('div');
         rol.textContent = dato.rol;
+        rol.className += "rol";
 
         const acciones = document.createElement('div');
 
@@ -40,7 +50,7 @@ window.addEventListener('load', function() {
         };
         acciones.appendChild(botonEditar);
 
-        if (dato.rol !== "Admin") {
+        if (dato.rol !== "Admin" && dato.eliminado === "no") {
             const botonEliminar = document.createElement('span');
             botonEliminar.innerHTML = "delete";
             botonEliminar.className = "material-symbols-outlined";
@@ -53,13 +63,30 @@ window.addEventListener('load', function() {
                     formConfirm.style.pointerEvents = "none";
                     datos[index].eliminado = "si"; 
                     fila.style.display = "none";
-                    document.getElementById("cbx-3").checked = false;
-               });
+                    
+                    // Desactiva el checkbox cbx-3 y oculta filas eliminadas
+                    cbx_3.checked = false;
+                    filtrar(); // Aplica los filtros para ocultar las filas eliminadas
+                    
+                    mensaje_avisoConfirm.textContent = "Se ha borrado el usuario";
+                    mensaje_avisoConfirm.style.backgroundColor = "red";
+                    avisoConfirm.style.opacity = "100";
+            
+                    setTimeout(function() {
+                        avisoConfirm.style.opacity = "0";
+                        avisoConfirm.style.pointerEvents = "none";
+                    }, 1500);
+
+                    botonEliminar.style.display = "none";
+            
+                    console.log(datos);
+                });
             };
             acciones.appendChild(botonEliminar);
         }
-
+            
         fila.appendChild(nombre);
+        fila.appendChild(apellido);
         fila.appendChild(email);
         fila.appendChild(telefono);
         fila.appendChild(rol);
@@ -74,6 +101,7 @@ window.addEventListener('load', function() {
 
     function cargarFormularioParaEdicion(fila, dato) {
         document.getElementById("nombre").value = dato.nombre;
+        document.getElementById("apellido").value = dato.apellido;
         document.getElementById("email").value = dato.email;
         document.getElementById("telefono").value = dato.telefono;
         document.getElementById("rol").value = dato.rol;
@@ -85,9 +113,15 @@ window.addEventListener('load', function() {
 
     function actualizarFila(fila, dato) {
         fila.children[0].textContent = dato.nombre;
-        fila.children[1].textContent = dato.email;
-        fila.children[2].textContent = dato.telefono;
-        fila.children[3].textContent = dato.rol;
+        fila.children[1].textContent = dato.apellido;
+        fila.children[2].textContent = dato.email;
+        fila.children[3].textContent = dato.telefono;
+        fila.children[4].textContent = dato.rol;
+
+        const index = Array.from(profesoresList.children).indexOf(fila); // Obtiene el índice de la fila en el DOM
+        if (index !== -1) {
+            datos[index] = { ...dato }; // Actualiza el array con los nuevos valores
+        }
     }
 
     datos.forEach((dato, index) => {
@@ -111,25 +145,59 @@ window.addEventListener('load', function() {
         this.value = this.value.replace(/[^0-9]/g, '')
     });
 
-    nuevoUsuarioForm.addEventListener("submit", function (event) {
-        event.preventDefault(); 
+    const input_nombre = document.getElementById("nombre");
+    const input_apellido = document.getElementById("apellido");
+    const input_email = document.getElementById("email");
 
+    input_nombre.addEventListener("input", generarEmail);
+    input_apellido.addEventListener("input", generarEmail);
+
+    function generarEmail() {
+        const nombre = input_nombre.value.trim().toLowerCase();
+        const apellido = input_apellido.value.trim().toLowerCase();
+        if (nombre && apellido) {
+            input_email.value = `${nombre}.${apellido}@ucavila.es`;
+        }else{
+            input_email.value = "";
+        }
+        
+    }
+
+    nuevoUsuarioForm.addEventListener("submit", function (event) {
+        event.preventDefault();
+        
         const nuevoUsuario = {
-            nombre: document.getElementById("nombre").value,
-            email: document.getElementById("email").value,
+            nombre: input_nombre.value.trim(),
+            apellido: input_apellido.value.trim(),
+            email: input_email.value.trim(),
             telefono: document.getElementById("telefono").value,
             rol: document.getElementById("rol").value,
+            eliminado: "no"
         }
 
         if (editIndex === null) {
-            agregarFila(nuevoUsuario);
+            agregarFila(nuevoUsuario, datos.length);
+            datos.push(nuevoUsuario);
         } else {
             actualizarFila(editIndex, nuevoUsuario);
         }
 
+
         nuevoUsuarioForm.reset(); 
         formbody.style.opacity = "0"; 
         formbody.style.pointerEvents = "none"; 
+
+        mensaje_avisoConfirm.textContent = "Se he agregado el usuario";
+        mensaje_avisoConfirm.style.backgroundColor = "green";
+        avisoConfirm.style.opacity = "100";
+
+        setInterval(function() {
+            avisoConfirm.style.opacity = "0";
+            avisoConfirm.style.pointerEvents = "none";
+        }, 1500);
+
+        console.log(datos);
+        
     });
 
     document.getElementById("cancelBtn").addEventListener("click", function() {
@@ -170,7 +238,7 @@ window.addEventListener('load', function() {
     
         const workBook = XLSX.utils.book_new();
         const workSheet = XLSX.utils.aoa_to_sheet([
-            ['Nombre', 'Email', 'Teléfono', 'Rol', 'Descatalogado'], ...data
+            ['Nombre', 'Apellido','Email', 'Teléfono', 'Rol', 'Descatalogado'], ...data
         ]);
         
         XLSX.utils.book_append_sheet(workBook, workSheet, 'Hoja1');
@@ -183,33 +251,36 @@ window.addEventListener('load', function() {
     
         filas.forEach((fila, index) => {
             const nombreTermino = document.getElementById("filtro-nombre").value.toLowerCase();
+            const apellidoTermino = document.getElementById("filtro-apellido").value.toLowerCase();
             const emailTermino = document.getElementById("filtro-email").value.toLowerCase();
             const telefonoTermino = document.getElementById("filtro-telefono").value.toLowerCase();
             const rolSeleccionado = document.getElementById("filtro-rol").value;
     
             const nombre = fila.children[0].textContent.toLowerCase();
-            const email = fila.children[1].textContent.toLowerCase();
-            const telefono = fila.children[2].textContent.toLowerCase();
-            const rol = fila.children[3].textContent;
+            const apellido = fila.children[1].textContent.toLowerCase();
+            const email = fila.children[2].textContent.toLowerCase();
+            const telefono = fila.children[3].textContent.toLowerCase();
+            const rol = fila.children[4].textContent;
     
-            const nombreCoincide = nombre.includes(nombreTermino);
-            const emailCoincide = email.includes(emailTermino);
-            const telefonoCoincide = telefono.includes(telefonoTermino);
+            const nombreCoincide = nombre.startsWith(nombreTermino);
+            const apellidoCoincide = apellido.startsWith(apellidoTermino);
+            const emailCoincide = email.startsWith(emailTermino);
+            const telefonoCoincide = telefono.startsWith(telefonoTermino);
             const rolCoincide = rolSeleccionado === "" || rol === rolSeleccionado;
     
             if (isChecked) {
                 // Se muestran todos los que coincidan con los filtros actuales (incluidos los eliminados)
-                if (datos[index].eliminado === "si" && nombreCoincide && emailCoincide && telefonoCoincide && rolCoincide) {
+                if (datos[index].eliminado === "si" && nombreCoincide && apellidoCoincide && emailCoincide && telefonoCoincide && rolCoincide) {
                     fila.style.display = "flex";
-                    fila.style.backgroundColor = "#F8D7DA"; // Color de eliminados
-                } else if (datos[index].eliminado === "no" && nombreCoincide && emailCoincide && telefonoCoincide && rolCoincide) {
+                    fila.className += " eliminado"
+                } else if (datos[index].eliminado === "no" && nombreCoincide && apellidoCoincide && emailCoincide && telefonoCoincide && rolCoincide) {
                     fila.style.display = "flex"; // Mantener los no eliminados también si coinciden con los filtros
                 } else {
                     fila.style.display = "none";
                 }
             } else {
                 // Si el checkbox no está activado, se aplican los filtros pero se ocultan los eliminados
-                if (datos[index].eliminado === "no" && nombreCoincide && emailCoincide && telefonoCoincide && rolCoincide) {
+                if (datos[index].eliminado === "no" && nombreCoincide && apellidoCoincide && emailCoincide && telefonoCoincide && rolCoincide) {
                     fila.style.display = "flex";
                 } else {
                     fila.style.display = "none";
@@ -223,27 +294,34 @@ window.addEventListener('load', function() {
 
     function filtrar() {
         const nombreTermino = document.getElementById("filtro-nombre").value.toLowerCase();
+        const apellidoTermino = document.getElementById("filtro-apellido").value.toLowerCase();
         const emailTermino = document.getElementById("filtro-email").value.toLowerCase();
         const telefonoTermino = document.getElementById("filtro-telefono").value.toLowerCase();
         const rolSeleccionado = document.getElementById("filtro-rol").value;
 
+        const checkbox2_checked = document.getElementById("cbx-3").checked;
         const filas = document.querySelectorAll('#profesores-list .fila');
 
-        filas.forEach(fila => {
+        filas.forEach((fila, index) => {
             const nombre = fila.children[0].textContent.toLowerCase();
-            const email = fila.children[1].textContent.toLowerCase();
-            const telefono = fila.children[2].textContent.toLowerCase();
-            const rol = fila.children[3].textContent;
-
-            const nombreCoincide = nombre.includes(nombreTermino);
-            const emailCoincide = email.includes(emailTermino);
-            const telefonoCoincide = telefono.includes(telefonoTermino);
+            const apellido = fila.children[1].textContent.toLowerCase();
+            const email = fila.children[2].textContent.toLowerCase();
+            const telefono = fila.children[3].textContent.toLowerCase();
+            const rol = fila.children[4].textContent;
+    
+            const nombreCoincide = nombre.startsWith(nombreTermino);
+            const apellidoCoincide = apellido.startsWith(apellidoTermino);
+            const emailCoincide = email.startsWith(emailTermino);
+            const telefonoCoincide = telefono.startsWith(telefonoTermino);
             const rolCoincide = rolSeleccionado === "" || rol === rolSeleccionado;
 
-            if (nombreCoincide && emailCoincide && telefonoCoincide && rolCoincide) {
-                fila.style.display = 'flex';
-            } else {
-                fila.style.display = 'none';
+            if (datos[index].eliminado === "no" && nombreCoincide && apellidoCoincide && emailCoincide && telefonoCoincide && rolCoincide) {
+                fila.style.display = "flex";
+            }else if (checkbox2_checked && datos[index].eliminado === "si" && nombreCoincide && apellidoCoincide && emailCoincide && telefonoCoincide && rolCoincide) {
+                fila.style.display = "flex";
+                fila.className += " eliminado";
+            }else {
+                fila.style.display = "none";
             }
         });
     }
@@ -258,12 +336,14 @@ window.addEventListener('load', function() {
     });
 
     document.getElementById("filtro-nombre").addEventListener("keyup", filtrar);
+    document.getElementById("filtro-apellido").addEventListener("keyup", filtrar);
     document.getElementById("filtro-email").addEventListener("keyup", filtrar);
     document.getElementById("filtro-telefono").addEventListener("keyup", filtrar);
     document.getElementById("filtro-rol").addEventListener("change", filtrar);
 
     document.getElementById("reset-filtro").addEventListener("click", function () {
         document.getElementById("filtro-nombre").value = "";
+        document.getElementById("filtro-apellido").value = "";
         document.getElementById("filtro-email").value = "";
         document.getElementById("filtro-telefono").value = "";
         document.getElementById("filtro-rol").value = "";
@@ -279,6 +359,7 @@ window.addEventListener('load', function() {
             if (checkbox1_checked) {
                 if (datos[index].eliminado === "si") {
                     fila.style.display = "flex";
+                    fila.className += " eliminado"
                 } else {
                     fila.style.display = "none";
                 }
@@ -302,31 +383,34 @@ window.addEventListener('load', function() {
     
         filas.forEach((fila, index) => {
             const nombreTermino = document.getElementById("filtro-nombre").value.toLowerCase();
+            const apellidoTermino = document.getElementById("filtro-apellido").value.toLowerCase();
             const emailTermino = document.getElementById("filtro-email").value.toLowerCase();
             const telefonoTermino = document.getElementById("filtro-telefono").value.toLowerCase();
             const rolSeleccionado = document.getElementById("filtro-rol").value;
     
             const nombre = fila.children[0].textContent.toLowerCase();
-            const email = fila.children[1].textContent.toLowerCase();
-            const telefono = fila.children[2].textContent.toLowerCase();
-            const rol = fila.children[3].textContent;
+            const apellido = fila.children[1].textContent.toLowerCase();
+            const email = fila.children[2].textContent.toLowerCase();
+            const telefono = fila.children[3].textContent.toLowerCase();
+            const rol = fila.children[4].textContent;
     
-            const nombreCoincide = nombre.includes(nombreTermino);
-            const emailCoincide = email.includes(emailTermino);
-            const telefonoCoincide = telefono.includes(telefonoTermino);
+            const nombreCoincide = nombre.startsWith(nombreTermino);
+            const apellidoCoincide = apellido.startsWith(apellidoTermino);
+            const emailCoincide = email.startsWith(emailTermino);
+            const telefonoCoincide = telefono.startsWith(telefonoTermino);
             const rolCoincide = rolSeleccionado === "" || rol === rolSeleccionado;
     
             if (isChecked) {
                 // Se muestran todos los que coincidan con los filtros actuales (solo los eliminados)
-                if (datos[index].eliminado === "si" && nombreCoincide && emailCoincide && telefonoCoincide && rolCoincide) {
+                if (datos[index].eliminado === "si" && nombreCoincide && apellidoCoincide && emailCoincide && telefonoCoincide && rolCoincide) {
                     fila.style.display = "flex";
-                    fila.style.backgroundColor = "#F8D7DA";
+                    fila.className += " eliminado";
                 } else {
                     fila.style.display = "none";
                 }
             } else {
                 // Si el checkbox no está activado, se aplican los filtros pero se ocultan los eliminados
-                if (datos[index].eliminado === "no" && nombreCoincide && emailCoincide && telefonoCoincide && rolCoincide) {
+                if (datos[index].eliminado === "no" && nombreCoincide && apellidoCoincide && emailCoincide && telefonoCoincide && rolCoincide) {
                     fila.style.display = "flex";
                 } else {
                     fila.style.display = "none";

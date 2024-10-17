@@ -5,6 +5,7 @@ body {
     box-sizing: border-box;
     display: flex;
     min-height: 100vh;
+    min-width: 100vw;
 }
 
 h1 {
@@ -173,14 +174,21 @@ header span {
 }
 
 #header-tabla p, .fila div {
-    flex: 1;
     padding: 20px;
     border-bottom: 1px solid #ddd;
     margin: 0;
 }
 
+.nombre, .apellido, .telefono, .rol {
+    flex: .5;
+}
+
+.email{
+    flex: 1;
+}
+
 #header-tabla p:last-child, .fila div:last-child {
-    flex: .4;
+    flex: .25;
     padding: 20px;
     border-bottom: 1px solid #ddd;
     margin: 0;
@@ -211,7 +219,7 @@ button:hover{
     transition: .5s;
 }
 
-#form-container, #form-container2{
+#form-container, #form-container2, #confirm-container{
     opacity: 0;
     transition: opacity 0.5s ease;
     display: flex;
@@ -241,6 +249,23 @@ button:hover{
     box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     padding: 10px;
     border-radius: 50px;
+}
+
+#avisoConfirm{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 20%;
+    width: 30%;
+    top: 50%; 
+    left: 50%; 
+    transform: translate(-50%, -50%);
+    position: fixed;
+    box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    padding: 10px;
+    border-radius: 50px;
+    color: #fff;
 }
 
 #nuevoUsuarioForm input, #nuevoUsuarioForm select{    
@@ -275,7 +300,7 @@ button:hover{
 .filtro input, .filtro select {
     padding: 10px;
     border-radius: 5px;
-    width: 15%;
+    width: 12%;
     color: #696969;
     background-color: #F1F5F9;
     border: .5px solid #696969;
@@ -289,6 +314,12 @@ button:hover{
 .descatalogado-check{
     margin: 30px;
     display: flex;
+}
+
+#reset-filtro{
+    padding-left: 15px;
+    padding-right: 15px;
+    width: 12%;
 }
 
 /*---------------------------------------------------------CHECKBOX---------------------------------------------------------*/
@@ -360,3 +391,7 @@ button:hover{
   }
 
 /*---------------------------------------------------------CHECKBOX---------------------------------------------------------*/ 
+
+.eliminado {
+    background-color: #F8D7DA;
+}

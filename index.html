@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profesores Colaboradores</title>
+    <link rel="shortcut icon" href="img/logo_ucav.png" type="image/x-icon">
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.9/xlsx.full.min.js"></script>
@@ -54,6 +55,7 @@
             <article class="filtro">
                 <form id="filtro-formulario">
                     <input type="text" id="filtro-nombre" placeholder="Buscar por Nombre">
+                    <input type="text" id="filtro-apellido" placeholder="Buscar por Apellido">
                     <input type="email" id="filtro-email" placeholder="Buscar por Email">
                     <input type="tel" id="filtro-telefono" placeholder="Buscar por Teléfono">
                     <select id="filtro-rol">
@@ -68,11 +70,12 @@
             </article>
             <article id="tabla" class="tabla">
                 <div id="header-tabla">
-                    <p>Nombre</p>
-                    <p>Email</p>
-                    <p>Telefono</p>
-                    <p>Rol</p>
-                    <p>Acciones</p>
+                    <p class="nombre">Nombre</p>
+                    <p class="apellido">Apellido</p>
+                    <p class="email">Email</p>
+                    <p class="telefono">Telefono</p>
+                    <p class="rol">Rol</p>
+                    <p class="acciones">Acciones</p>
                 </div>
                 <div id="content-tabla">
                     <div id="profesores-list"></div>
@@ -90,7 +93,8 @@
         <section id="form-container" style="pointer-events: none;">
             <form id="nuevoUsuarioForm">
                 <input type="text" id="nombre" placeholder="Nombre" required>
-                <input type="email" id="email" placeholder="Email" required>
+                <input type="text" id="apellido" placeholder="Apellido" required>
+                <input type="email" id="email" placeholder="Email" required readonly>
                 <input type="tel" id="telefono" placeholder="Teléfono" required>
                 <select id="rol" required>
                     <option value="Usuario">Usuario</option>
@@ -106,6 +110,9 @@
                 <button type="button" id="confirmarBtn">Si</button>
                 <button type="button" id="cancelBtn2">No</button>
             </form>
+        </section>
+        <section id="confirm-container" style="pointer-events: none;">
+            <p id="avisoConfirm"></p>
         </section>
     </main>
     <script src="script_copy.js"></script>
