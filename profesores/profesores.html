@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Usuarios</title>
+    <link rel="stylesheet" href="styles/profesores.css">
+    <link rel="shortcut icon" href="" type="image/x-icon">
+
+</head>
+<body>
+    <!-- Menú info y enlaces -->
+    <aside id="aside">
+        <div id="fotos_perfil">
+            <div id="icono_empresa">
+                <img src="https://img.freepik.com/fotos-premium/gato-de-negocios-de-terno-com-gravata-vermelha_53419-13772.jpg" alt="icono">
+            </div>
+            
+            <p id="foto_perfil"> <i class="fas fa-user"></i> </p>
+        </div>
+        <div id="datos_perfil">
+            <p id="nombre_perfil">Diego</p>
+            <p id="correo_perfil">diego.blazquez@ucavila.es</p>
+        </div>
+
+        <div id="principal_perfil">
+            <p id="pricipal_titulo_perfil">PRINCIPAL</p>
+            <div id="contenido_pricipal_perfil">
+                <div id="contenido_asociados_perfil">
+                    <p id="icono_acosiados"><i class="fas fa-user-friends"></i></p>
+                    <a href="./asociados.html"><p id="asociados_perfil">Asociados</p></a>
+                </div>
+                <div id="contenido_remesas_perfil">
+                    <p id="icono_remesas"><i class='far fa-clone'></i> </p>
+                    <a href="./remesas.html"><p id="remesas_perfil">Remesas</p></a>
+                </div>
+                
+            </div>
+        </div>
+        <div id="contenido_administracion_perfil">
+                <p id="administraccion_perfil">ADMINISTRACCIÓN</p>
+                <div id="contenido_administraccion_perfil">
+                    <p id="icono_acosiados"> <i class="fas fa-user-friends"></i></p>
+                    <p id="gestion_usuarios_perfil">Gestión usuarios</p>
+                </div>
+                
+        </div>
+    </aside>
+
+    <header id="header">
+        <div id="boton_menu">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+        <div id="icono_ampliar">
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+            <i class="fas fa-expand"></i>
+        </div>
+        
+    </header>
+    <main>
+        <div id="usuarios">
+            <p id="p_usuarios">Profesores</p>
+            <button id="boton_exportar"><i class='fas fa-file-export'></i> Exportar a Excel</button>
+            <button id="boton_add_usuario">+ Nuevo</button>
+        </div>
+
+        <div id="filtroProfesores">
+            <input type="text" id="nombreFiltro" placeholder="Nombre">
+            <input type="text" id="emailFiltro" placeholder="Email">
+            <input type="text" id="telefonoFiltro" placeholder="Teléfono">
+            <select name="rolFiltro" id="rolFiltro">
+                <option value="">Rol</option>
+                <option value="Admin">Admin</option>
+                <option value="Usuario">Usuario</option>
+                <option value="Trabajador">Trabajador</option>
+            </select>
+            <input type="text" id="fecha-alta" placeholder="Fecha de alta">
+            <input type="checkbox" id="descatalogados" checked>Descatalogado            
+        </div>
+        <!-- Modal -->
+        <div id="modal" class="modal">
+            <div class="modal_content">
+                <span class="close">&times;</span>
+                <h3 id="modal_titulo">Añadir Nuevo Profesor</h3>
+                <form id="form_nuevo_profesor">
+                    <input type="text" id="nombre" placeholder="Nombre" required>
+                    <input type="email" id="email" placeholder="Email" required>
+                    <input type="tel" id="telefono" placeholder="Teléfono" required>
+                    <input type="text" id="rol" placeholder="Rol" required>
+                    <button type="submit">Añadir Profesor</button>
+                </form>
+            </div>
+        </div>
+        <div id="tabla-profesores" class="tabla-container">
+            <article id="profesores-lista">
+                
+            </article>
+        </div>
+
+        <div id="modalConfirmacionEliminar" class="modal">
+            <div class="modal_content">
+                <span class="cerrarConfirmacion">&times;</span>
+                <h3>¿Estás seguro de que deseas eliminar este profesor?</h3>
+                <button id="btnConfirmarEliminar" class="modal_buton">Sí, eliminar</button>
+                <button id="btnCancelarEliminar" class="modal_buton">Cancelar</button>
+            </div>
+        </div>
+        
+        <div id="mensajeEliminacion" class="mensaje-flotante-borrar" style="display: none;">Se ha eliminado un profesor</div>
+        <div id="mensajeAddProfesor" class="mensaje-flotante-add" style="display: none;">Se ha añadido un profesor</div>
+    </main>
+    
+</body>
+<script src="js/profesores.js"></script>
+</html>

@@ -1,0 +1,485 @@
+body{margin: 0 auto;
+background-color:white;
+display: flex;
+font-family: Arial, sans-serif;
+color: gray;
+ transition: margin-left 0.3s ease; /* Transición para el movimiento del contenido */
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    left: 0.5vw;
+    width: 100%;
+    height: 10%;
+    transition: margin-left 0.3s ease; /* Transición para mover el header */
+    box-shadow: 1px 1px 0px 0px black;
+    background-color: white;
+    z-index: 1000;
+}
+header.moved {
+    margin-left: 250px; /* Mover el header hacia la derecha */
+}
+
+#icono_ampliar{
+    position: fixed;
+    right: 2vw;
+}
+#icono_ampliar i {
+   font-size: x-large;
+}
+
+
+main{
+    height: auto;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+
+}
+#usuarios{
+    display: flex;
+    flex-direction: row;
+    margin-left: 5%;
+    padding-top: 4%;
+}
+
+#boton_exportar{
+    margin-left: 60vw;
+    margin-top: 3%;
+    background-color: #F43F5E;
+    border-radius: 50px;
+    width: auto;
+    height: 40%;
+    max-height: 50%;
+    align-self: center;
+    border-style: none;
+    color: white;
+    padding-right: 0.3em;
+    font-size: medium;
+}
+#boton_add_usuario{
+    margin-left: 1vw;
+    margin-top: 3%;
+    background-color: #F43F5E;
+    border-radius: 50px;
+    width: 9%;
+    height: 40%;
+    max-height: 50%;
+    align-self: center;
+    border-style: none;
+    color: white;
+    padding-right: 0.3em;
+    font-size: medium;
+}
+
+#p_usuarios{
+    margin-top: 4%;
+    display: flex;
+    font-size: 2em;
+    padding-left: 2%;
+    font-weight: bold;
+    color: black;
+}
+
+#boton_menu{
+    padding-left: 1%;
+}
+
+#boton_menu div {
+
+    width: 25px;
+    height: 2px;
+    background-color: black;
+    margin: 6px 0;
+}
+
+aside{
+    background-color: #0F172A;
+    width: 25%;
+    display: inline-block;
+    position: fixed;
+    top: 0;
+    left: -250px; /* Fuera de la pantalla */
+    width: 250px; /* Ancho del menú */
+    height: 100%;
+    transition: left 0.3s ease; /* Transición suave */
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
+}
+aside.open {
+    left: 0; /* Mostrar el menú */
+}
+aside.open + main {
+    margin-left: 250px; /* Mover el contenido hacia la derecha */
+}
+aside p{
+    border-collapse: collapse;
+}
+
+aside a{
+    text-decoration: none;
+   color: gray;
+    width: 100%;
+}
+
+#fotos_perfil{
+    display: flex;
+}
+#foto_perfil{
+    display: flex;
+    padding-right: 15%;
+    padding-top: 15%;
+}
+#icono_empresa{
+    display: flex;
+    height: 60%;
+}
+#icono_empresa img{
+    margin-top: 1.5vw;
+    margin-left: 1.5vw;
+    width: 50%;
+    height: 100%;
+    max-width: 50%;
+    max-height: 100%;
+    display: inline-block;
+}
+
+#datos_perfil{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    padding: 10%;
+}
+#nombre_perfil{
+    color: white;
+    padding-bottom: 4%;
+}
+#datos_perfil p {
+    margin: 0;
+}
+
+#principal_perfil{
+    display: flex;
+    flex-direction: column;
+}
+#contenido_pricipal_perfil{
+    display: flex;
+    flex-direction: column;
+}
+
+#contenido_asociados_perfil{
+    display: flex;
+    padding-left: 5%;
+}
+#contenido_asociados_perfil:hover{
+    background-color: #2C3344;
+    color: white;
+}
+#contenido_asociados_perfil:hover a{
+    background-color: #2C3344;
+    color: white;
+}
+#asociados_perfil{
+    margin-left: 5%;
+}
+#remesas_perfil{
+    margin-left: 6%;
+}
+#contenido_remesas_perfil{
+    display: flex;
+    padding-left: 5%;
+}
+#contenido_remesas_perfil:hover{
+    background-color: #2C3344;
+    color: white;
+}
+#contenido_remesas_perfil:hover a{
+    background-color: #2C3344;
+    color: white;
+}
+
+#contenido_administraccion_perfil{
+    display: flex;
+    padding-left: 5%;
+}
+#contenido_administraccion_perfil:hover{
+    background-color: #2C3344;
+    color: white;
+}
+#contenido_administraccion_perfil:hover a{
+    background-color: #2C3344;
+    color: white;
+}
+
+#administraccion_perfil{
+    display: flex;
+}
+#gestion_usuarios_perfil{
+padding-left: 5%;
+}
+
+#pricipal_titulo_perfil, #administraccion_perfil{
+    color: #EE6A7A;
+    padding-left: 4%;
+}
+
+#filtroProfesores {
+    background-color: #f1f5f9;
+    border-radius: 5px;
+    width: 100%;
+}
+
+#filtroProfesores input {
+    margin-left: 3vw;
+    margin-top: 2vw;
+    padding: 1vw;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #f1f5f9;
+}
+#filtroProfesores input #descatalogados{
+    width: 8%;
+    margin-left: 0vw;
+    margin-right: 0vw;
+    margin-top: 2vw;
+    padding: 1vw;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+#filtroProfesores p{
+    width: 8%;
+    margin-right: 1vw;
+    padding: 1vw;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+#filtroProfesores button {
+    padding: 5px 10px;
+    background-color: #F43F5E;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+#rolFiltro {
+    margin: 5px;
+    padding: 1vw;
+    border-radius: 4px;
+    width: 15%; /* Ajusta al ancho del contenedor */
+    margin-left: 3vw;
+    margin-right: 1vw;
+    margin-top: 2vw;
+    border: 1px solid #ccc;
+    appearance: none; /* Elimina el estilo por defecto */
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="gray" d="M7 10l5 5 5-5z"/></svg>'); /* Icono de flecha */
+    background-repeat: no-repeat;
+    background-position: right 10px center; /* Posiciona el icono */
+    background-size: 2em; /* Tamaño del icono */
+    background-color: #f1f5f9;
+
+}
+
+
+#filtroProfesores button:hover {
+    background-color: #D12D4D; /* Color más oscuro al pasar el mouse */
+}
+
+h2 {
+    text-align: center;
+    color: #333;
+}
+
+.tabla-container {
+    background-color: #F1F5F9;
+    padding: auto;
+    padding: 2vw; /* Espaciado interno */
+}
+
+#profesores-lista{
+    box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    
+}
+
+.cabecera{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr auto; /* 4 columnas + 1 para acciones */
+    border: 1px solid #ddd;
+    padding: 10px;
+    background-color: white;
+    align-content: center;
+    width: 99%;
+
+}
+
+.profesor {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr auto; /* 4 columnas + 1 para acciones */
+    border: 1px solid #ddd;
+    padding: 10px;
+   
+    background-color: white;
+    align-content: center;
+    width: 99%;
+}
+
+.profesor h3 {
+    grid-column: span 1; /* Nombre en su propia celda */
+    margin: 0;
+    color: #007bff;
+}
+
+.profesor p {
+    margin: 5px 0;
+}
+
+.acciones {
+    grid-column: span 1; /* Acciones en su propia celda */
+    display: flex;
+    align-items: center;
+}
+
+.edit_user, .delete_user {
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+.edit_user:hover, .delete_user:hover {
+    color: #0056b3;
+}
+
+@media (max-width: 600px) {
+    #profesores-lista {
+        padding: 15px;
+    }
+
+    .profesor {
+        padding: 10px;
+        grid-template-columns: 1fr; /* Una columna en pantallas pequeñas */
+    }
+}
+
+.edit_user{
+    display: flex;
+}
+.delete_user{
+    display: flex;
+    padding-left: 1em ;
+}
+
+.modal {
+    display: none; /* Ocultar la modal por defecto */
+    position: fixed; /* Queda en la pantalla */
+    z-index: 1; /* Se superpone a otros elementos */
+    left: 0;
+    top: 0;
+    width: 100%; /* Ancho completo */
+    height: 100%; /* Alto completo */
+    overflow: auto; /* Permitir desplazamiento si es necesario */
+    background-color: rgb(0,0,0); /* Color de fondo */
+    background-color: rgba(0,0,0,0.4); /* Fondo con transparencia */
+}
+
+.modal_content {
+    background-color: #fefefe;
+    margin: 15% auto; /* 15% desde la parte superior y centrado */
+    padding: 5%;
+    border: 1px solid #888;
+    width: 20%; /* Ancho de la modal */
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+#form_nuevo_profesor input{
+    margin: 2%;
+    border-radius: 5px;
+    border: 1px solid black;
+    padding: 5px;
+}
+#form_nuevo_profesor button{
+    margin: 1%;
+    border-radius: 5px;
+    border-style: none;
+    background-color: #F43F5E;
+    padding: 4%;
+    color: white;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+
+#btnCancelarEliminar,#btnConfirmarEliminar {
+    background-color: #F43F5E; /* Color para el botón de confirmar */
+    color: white;
+    margin: 10px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.mensaje-flotante-borrar {
+    position: fixed;
+    top: 5%; /* Ajustar para que esté en la parte superior */
+    left: 50%;
+    transform: translateX(-50%); /* Centrar horizontalmente */
+    background-color: rgba(255, 69, 58, 0.9); /* Color de fondo */
+    color: white;
+    padding: 15px 25px; /* Padding ajustado */
+    border-radius: 5px; /* Bordes redondeados */
+    font-size: 18px; /* Tamaño de fuente */
+    font-weight: bold; /* Texto en negrita */
+    text-align: center; /* Centrar texto */
+    transition: opacity 2s ease; /* Transición de opacidad */
+    opacity: 0; /* Inicialmente oculto */
+    z-index: 1000; /* Justo encima del overlay */
+}
+
+.mensaje-flotante-borrar {
+    display: none; /* Inicialmente oculto */
+    transform: translate(-50%, -50%) scale(1);
+}
+.mensaje-flotante-add {
+    position: fixed;
+    top: 5%; /* Ajustar para que esté en la parte superior */
+    left: 50%;
+    transform: translateX(-50%); /* Centrar horizontalmente */
+    background-color: rgba(71, 223, 73, 0.992); /* Color de fondo */
+    color: white;
+    padding: 15px 25px; /* Padding ajustado */
+    border-radius: 5px; /* Bordes redondeados */
+    font-size: 18px; /* Tamaño de fuente */
+    font-weight: bold; /* Texto en negrita */
+    text-align: center; /* Centrar texto */
+    transition: opacity 2s ease; /* Transición de opacidad */
+    opacity: 0; /* Inicialmente oculto */
+    z-index: 1000; /* Justo encima del overlay */
+}
+
+.mensaje-flotante-add {
+    display: none; /* Inicialmente oculto */
+    transform: translate(-50%, -50%) scale(1);
+}
